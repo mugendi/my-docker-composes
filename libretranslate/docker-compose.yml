@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  libretranslate:
+    image: libretranslate/libretranslate
+    container_name: libretranslate
+    restart: unless-stopped
+    ports:
+      - "9181:5000"
+    environment:
+      - LT_LOAD_ONLY=en,es,fr,de,it,pt,ru,zh
+    volumes:
+      - lt-local:/home/libretranslate/.local
+    command: >
+      --load-only en,es,fr,de,it,pt,ru,zh
+
+volumes:
+  lt-local:

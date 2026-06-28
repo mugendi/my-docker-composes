@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  db:
+    # Use the official TimescaleDB image with PostgreSQL 16
+    image:  timescale/timescaledb:latest-pg16
+    container_name: hotel_intelligence_db
+    restart: always
+    environment:
+      # Set the password for the default 'postgres' user
+      # IMPORTANT: Use a secure password, preferably from a .env file for real projects
+      POSTGRES_PASSWORD: ^ts_Hotel_Datax#
+    ports:
+      # Map the container's port 5432 to your local machine's port 5432
+      - "5433:5432"
+    volumes:
+      # This ensures your data persists even if you stop/remove the container
+      - timescaledb-data:/var/lib/postgresql/hotel_intel_data
+
+volumes:
+  timescaledb-data:

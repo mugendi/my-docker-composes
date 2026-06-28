@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  tor:
+    image: dperson/torproxy
+    container_name: tor_proxy
+    ports:
+      - "9050:9050"  # SOCKS5 proxy
+      - "9051:9051"  # Control port
+    environment:
+      - PASSWORD=torPass  # Control port password
+    restart: unless-stopped
+    networks:
+      - tor_network
+
+networks:
+  tor_network:
+    driver: bridge
